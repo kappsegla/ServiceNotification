@@ -4,5 +4,4 @@
                 <item quantity="one">%d time</item>
                 <item quantity="other">%d times</item>
             </plurals>
-
 </resources>

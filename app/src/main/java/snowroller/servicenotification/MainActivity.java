@@ -20,25 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new MyIntentService().getActionFooIntent(getApplicationContext(),"test","test");
-
-        final PendingIntent pIntent = PendingIntent.getService(getApplicationContext(),
-                1, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
-
-        long firstMillis = System.currentTimeMillis(); // alarm is set right away
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
-        // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
-                10000, pIntent);
-
-//        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-//        alarm.cancel(pIntent);
-
-        //MyIntentService.startActionFoo(this, "", "");
-
-      /*  ScheduledExecutorService scheduler =
+      /*
+      //For issuing periodic events only when app is running.
+      ScheduledExecutorService scheduler =
                 Executors.newSingleThreadScheduledExecutor();
 
         scheduler.scheduleAtFixedRate
@@ -66,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
         // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
-                10000, pIntent);
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pIntent);
 
     }
     public void stopButton(View v)
